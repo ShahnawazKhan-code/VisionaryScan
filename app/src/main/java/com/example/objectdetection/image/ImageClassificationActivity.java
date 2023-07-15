@@ -32,7 +32,7 @@ public class ImageClassificationActivity extends ImageHelperActivity {
 
     @Override
     protected void runclassification(Bitmap bitmap) {
-        super.runclassification(bitmap);
+
 
         InputImage inputImage= InputImage.fromBitmap(bitmap,0);
         imageLabeler.process(inputImage).addOnSuccessListener(new OnSuccessListener<List<ImageLabel>>() {
