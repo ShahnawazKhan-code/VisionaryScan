@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.objectdetection.helper.ImageHelperActivity;
+import com.example.objectdetection.image.ImageClassificationActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGotoImageActivity(View view){
-        Intent intent = new Intent(this, ImageHelperActivity.class);
+        Intent intent = new Intent(this, ImageClassificationActivity.class);
         startActivity(intent);
     }
 

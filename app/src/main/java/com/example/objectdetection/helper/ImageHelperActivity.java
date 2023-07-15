@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,19 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.objectdetection.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.label.ImageLabel;
-import com.google.mlkit.vision.label.ImageLabeler;
-import com.google.mlkit.vision.label.ImageLabeling;
-import com.google.mlkit.vision.label.defaults.ImageLabelerOptions;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class ImageHelperActivity extends AppCompatActivity {
 
@@ -46,7 +36,7 @@ public class ImageHelperActivity extends AppCompatActivity {
 
     private TextView textViewOutput;
 
-    private ImageLabeler imageLabeler;
+
     private File photoFile;
 
     @Override
@@ -56,10 +46,7 @@ public class ImageHelperActivity extends AppCompatActivity {
 
         imageViewInput = findViewById(R.id.imageViewInput);
         textViewOutput = findViewById(R.id.textViewOutput);
-        imageLabeler = ImageLabeling.getClient(new ImageLabelerOptions.Builder()
-                .setConfidenceThreshold(0.10f)
-                .build()
-        );
+
 
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -149,30 +136,17 @@ public class ImageHelperActivity extends AppCompatActivity {
         return  bitmap;
     }
 
-    private void runclassification(Bitmap bitmap){
-        InputImage inputImage= InputImage.fromBitmap(bitmap,0);
-        imageLabeler.process(inputImage).addOnSuccessListener(new OnSuccessListener<List<ImageLabel>>() {
-            @Override
-            public void onSuccess(@NonNull List<ImageLabel> imageLabels) {
-                if (imageLabels.size()>0){
-                    StringBuilder builder = new StringBuilder();
-                    for (ImageLabel label : imageLabels){
-                        builder.append(label.getText())
-                                .append(" : ")
-                                .append(label.getConfidence())
-                                .append("\n");
-                    }
-                    textViewOutput.setText(builder.toString());
+    protected void runclassification(Bitmap bitmap){
 
-                } else {
-                    textViewOutput.setText("could not classify");
-                }
-            }
-        }) .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
+    }
+
+    protected TextView getTextViewOutput(){
+
+        return textViewOutput;
+    }
+
+    protected ImageView getImageViewInput(){
+
+        return imageViewInput;
     }
 }
