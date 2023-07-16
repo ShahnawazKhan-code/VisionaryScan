@@ -10,7 +10,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ImageHelperActivity extends AppCompatActivity {
 
@@ -140,13 +145,41 @@ public class ImageHelperActivity extends AppCompatActivity {
 
     }
 
-    protected TextView getTextViewOutput(){
+    protected TextView getTextViewOutput(){return textViewOutput;}
 
-        return textViewOutput;
+    protected ImageView getImageViewInput(){return imageViewInput;}
+
+    protected void drawDetectionResult(List<BoxWithLabel> boxes,Bitmap bitmap){
+        Bitmap outputBitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
+
+        Canvas canvas = new Canvas(outputBitmap);
+
+        Paint penRect = new Paint();
+        penRect.setColor(Color.RED);
+        penRect.setStyle(Paint.Style.STROKE);
+        penRect.setStrokeWidth(8f);
+
+        Paint penLabel = new Paint();
+        penLabel.setColor(Color.YELLOW);
+        penLabel.setStyle(Paint.Style.FILL_AND_STROKE);
+        penLabel.setTextSize(96f);
+        penLabel.setStrokeWidth(2f);
+
+        for (BoxWithLabel boxWithLabel:boxes) {
+            canvas.drawRect(boxWithLabel.rect, penRect);
+
+            //Rect
+            Rect labelsize = new Rect(0, 0, 0, 0);
+            penLabel.getTextBounds(boxWithLabel.label,0, boxWithLabel.label.length(),labelsize);
+
+            float fontSize = penLabel.getTextSize() * boxWithLabel.rect.width() / labelsize.width();
+            if(fontSize < penLabel.getTextSize()){
+                penLabel.setTextSize(fontSize);
+            }
+            canvas.drawText(boxWithLabel.label,boxWithLabel.rect.left,boxWithLabel.rect.top + labelsize.height(),penLabel);
+        }
+        getImageViewInput().setImageBitmap(outputBitmap);
     }
 
-    protected ImageView getImageViewInput(){
 
-        return imageViewInput;
-    }
 }
