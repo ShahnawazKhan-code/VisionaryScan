@@ -1,12 +1,10 @@
 package com.example.objectdetection;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import com.example.objectdetection.helper.ImageHelperActivity;
+import com.example.objectdetection.image.FaceDetectionActivity;
 import com.example.objectdetection.image.FlowerIdentificationActivity;
 import com.example.objectdetection.image.ImageClassificationActivity;
 import com.example.objectdetection.image.ObjectDetectionActivity;
@@ -34,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onGotoFaceDetection(View view){
+        Intent intent = new Intent(this, FaceDetectionActivity.class);
+        startActivity(intent);
+    }
 
 
 }

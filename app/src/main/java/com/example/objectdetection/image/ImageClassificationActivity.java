@@ -2,9 +2,7 @@ package com.example.objectdetection.image;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-
 import com.example.objectdetection.helper.ImageHelperActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,7 +11,6 @@ import com.google.mlkit.vision.label.ImageLabel;
 import com.google.mlkit.vision.label.ImageLabeler;
 import com.google.mlkit.vision.label.ImageLabeling;
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions;
-
 import java.util.List;
 
 public class ImageClassificationActivity extends ImageHelperActivity {

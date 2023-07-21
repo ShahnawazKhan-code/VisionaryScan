@@ -16,6 +16,7 @@
             android:name=".image.ImageClassificationActivity" />
         <activity android:name=".image.FlowerIdentificationActivity"/>
         <activity android:name=".image.ObjectDetectionActivity"/>
+        <activity android:name=".image.FaceDetectionActivity"/>
         <activity
 
             android:name=".MainActivity"
