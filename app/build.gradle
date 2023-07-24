@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.objectdetection"
-        minSdk 21
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -45,6 +46,15 @@ dependencies {
 
     // face detection
     implementation 'com.google.mlkit:face-detection:16.1.5'
+
+    //audio
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.4'
+    //implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.0'
+
+
+    //for design button
+    implementation 'com.github.fornewid:neumorphism:0.3.2'
+
 
 
     testImplementation 'junit:junit:4.13.2'

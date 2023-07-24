@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,12 +16,12 @@
         android:theme="@style/Theme.ObjectDetection"
         tools:targetApi="31">
         <activity
-            android:name=".image.ImageClassificationActivity" />
-        <activity android:name=".image.FlowerIdentificationActivity"/>
-        <activity android:name=".image.ObjectDetectionActivity"/>
-        <activity android:name=".image.FaceDetectionActivity"/>
+            android:name=".audio.AudioClassificationActivity"/>
+        <activity android:name=".image.ImageClassificationActivity" />
+        <activity android:name=".image.FlowerIdentificationActivity" />
+        <activity android:name=".image.ObjectDetectionActivity" />
+        <activity android:name=".image.FaceDetectionActivity" />
         <activity
-
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -33,13 +36,12 @@
         </activity>
 
         <provider
-            android:authorities="com.iago.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.iago.fileprovider"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileprovider"/>
+                android:resource="@xml/fileprovider" />
         </provider>
     </application>
 

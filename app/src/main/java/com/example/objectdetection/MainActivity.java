@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.objectdetection.audio.AudioClassificationActivity;
+import com.example.objectdetection.helper.AudioHelperActivity;
 import com.example.objectdetection.image.FaceDetectionActivity;
 import com.example.objectdetection.image.FlowerIdentificationActivity;
 import com.example.objectdetection.image.ImageClassificationActivity;
@@ -37,5 +40,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onGotoAudioClassification(View view){
+        Intent intent = new Intent(this, AudioClassificationActivity.class);
+        startActivity(intent);
+    }
 
 }
