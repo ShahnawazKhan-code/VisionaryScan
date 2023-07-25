@@ -4,34 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efefef"
     tools:context=".helper.ImageHelperActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#648076"
+        android:background="#efefef"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/Pickimage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pick image"
+            android:layout_width="180dp"
+            android:layout_height="80dp"
+            android:text="@string/pick_image"
+            android:gravity="center"
             android:onClick="onPickImage"
+            style="@style/Widget.Neumorph.Button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/Startcamera"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/Startcamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start camera"
+            android:layout_width="180dp"
+            android:layout_height="80dp"
+            android:text="start camera"
+            android:gravity="center"
             android:onClick="onStartCamera"
+            style="@style/Widget.Neumorph.Button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -44,10 +50,11 @@
         android:id="@+id/imageViewInput"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/baseline_center_focus_strong_24" />
 
 
     <ScrollView

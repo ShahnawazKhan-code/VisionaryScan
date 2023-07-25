@@ -1,84 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efefef"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <soup.neumorphism.NeumorphTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="object detection"
+        android:layout_gravity="center"
+        android:textColor="#efefef"
+        app:neumorph_shadowColorDark="@color/black"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp">
+
+    </soup.neumorphism.NeumorphTextView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:background="#efefef"
+    android:gravity="center">
+
+    <soup.neumorphism.NeumorphImageButton
         android:id="@+id/button"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="#648076"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/image_classification"
         android:onClick="onGotoImageActivity"
-        android:text="Goto image classification"
-        />
 
-    <androidx.appcompat.widget.AppCompatButton
+
+    />
+
+    <soup.neumorphism.NeumorphImageButton
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#648076"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button"
-        android:layout_marginTop="16dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/flower_identifiation"
+        style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoFlowerActivity"
-        android:text="Goto flower identification"
         />
+</LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="#efefef"
+    android:gravity="center">
+
+    <soup.neumorphism.NeumorphImageButton
+
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#648076"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2"
-        android:layout_marginTop="16dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/object_detection"
+        style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoObjectDetection"
-        android:text="Goto object detection"
+
         />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <soup.neumorphism.NeumorphImageButton
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#648076"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button3"
-        android:layout_marginTop="16dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/face_detection"
+        style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoFaceDetection"
-        android:text="Goto face detection"
         />
+</LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
+<LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#648076"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button4"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:background="#efefef"
+        android:gravity="center">
+
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/button5"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/voice_detection"
+        style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoAudioClassification"
-        android:text="Goto audio classification"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+</LinearLayout>
