@@ -49,7 +49,7 @@ public class FaceDetectionActivity  extends ImageHelperActivity {
                             getTextViewOutput().setText("No face detected");
                         }else {
                             List<BoxWithLabel> boxes = new ArrayList<>();
-                            for (Face face : faces) {
+                            for (Face face  : faces) {
                                 BoxWithLabel boxWithLabel = new BoxWithLabel(
                                         face.getBoundingBox(),
                                         face.getTrackingId() + ""

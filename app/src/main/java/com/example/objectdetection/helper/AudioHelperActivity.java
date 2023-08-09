@@ -14,10 +14,10 @@ import com.example.objectdetection.R;
 
 public class AudioHelperActivity extends AppCompatActivity {
 
-    protected TextView audio_output_textview;
-    protected TextView audio_specs_textview;
-    protected Button audio_btn_start;
-    protected Button audio_btn_stop;
+    protected TextView outputTextView;
+    protected TextView specsTextView;
+    protected Button startRecordingbtn;
+    protected Button stopRecordingbtn;
 
 
 
@@ -26,14 +26,14 @@ public class AudioHelperActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_helper);
 
-        audio_output_textview = findViewById(R.id.audio_output_textview);
-        audio_specs_textview = findViewById(R.id.audio_specs_textview);
-        audio_btn_start = findViewById(R.id.audio_btn_start);
-        audio_btn_stop = findViewById(R.id.audio_btn_stop);
+        outputTextView = findViewById(R.id.audio_output_textview);
+        specsTextView = findViewById(R.id.audio_specs_textview);
+        startRecordingbtn = findViewById(R.id.audio_btn_start);
+        stopRecordingbtn = findViewById(R.id.audio_btn_stop);
 
-        audio_btn_stop.setEnabled(false);
+        stopRecordingbtn.setEnabled(false);
 
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)
                     != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 0);
@@ -43,11 +43,11 @@ public class AudioHelperActivity extends AppCompatActivity {
     }
 
     public  void startRecording(View view){
-        audio_btn_start.setEnabled(false);
-        audio_btn_stop.setEnabled(true);
+        startRecordingbtn.setEnabled(false);
+        stopRecordingbtn.setEnabled(true);
     }
     public  void stopRecording(View view){
-        audio_btn_start.setEnabled(true);
-        audio_btn_stop.setEnabled(false);
+        startRecordingbtn.setEnabled(true);
+        stopRecordingbtn.setEnabled(false);
     }
 }

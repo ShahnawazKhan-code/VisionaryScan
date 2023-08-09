@@ -33,9 +33,9 @@ public class AudioClassificationActivity extends AudioHelperActivity {
         super.onCreate(savedInstanceState);
 
         try {
-
             audioClassifier = AudioClassifier.createFromFile(this,model);
-        }catch (IOException e){
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
 
@@ -49,7 +49,7 @@ public class AudioClassificationActivity extends AudioHelperActivity {
         TensorAudio.TensorAudioFormat format = audioClassifier.getRequiredTensorAudioFormat();
         String specs = "Number of channels: "+ format.getChannels() + "\n"
                 + "Sample Rate: " + format.getSampleRate();
-        audio_specs_textview.setText(specs);
+        specsTextView.setText(specs);
 
         audioRecord = audioClassifier.createAudioRecord();
         audioRecord.startRecording();
@@ -61,7 +61,7 @@ public class AudioClassificationActivity extends AudioHelperActivity {
 
                 List<Category> finalOutput = new ArrayList<>();
 
-                for (Classifications classifications:output){
+                for (Classifications classifications : output){
                     for (Category category: classifications.getCategories()){
                         if (category.getScore() > 0.3f){
                             finalOutput.add(category);
@@ -72,7 +72,7 @@ public class AudioClassificationActivity extends AudioHelperActivity {
                 StringBuilder outputstr = new StringBuilder();
 
                 for (Category category : finalOutput){
-                    outputstr .append(category.getScore())
+                    outputstr.append(category.getLabel())
                             .append(": ")
                             .append(category.getScore())
                             .append("\n");
@@ -80,7 +80,7 @@ public class AudioClassificationActivity extends AudioHelperActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        audio_output_textview.setText(outputstr.toString());
+                        outputTextView.setText(outputstr.toString());
 
                     }
                 });

@@ -22,7 +22,7 @@ public class ImageClassificationActivity extends ImageHelperActivity {
         super.onCreate(savedInstanceState);
 
         imageLabeler = ImageLabeling.getClient(new ImageLabelerOptions.Builder()
-                .setConfidenceThreshold(0.10f)
+                .setConfidenceThreshold(0.7f)
                 .build()
         );
     }
