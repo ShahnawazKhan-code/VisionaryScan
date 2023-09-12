@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import com.example.objectdetection.audio.AudioClassificationActivity;
-import com.example.objectdetection.helper.AudioHelperActivity;
 import com.example.objectdetection.image.FaceDetectionActivity;
 import com.example.objectdetection.image.FlowerIdentificationActivity;
 import com.example.objectdetection.image.ImageClassificationActivity;
 import com.example.objectdetection.image.ObjectDetectionActivity;
+import com.example.objectdetection.textRecoganization.TextRecoganization;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGotoAudioClassification(View view){
-        Intent intent = new Intent(this, AudioClassificationActivity.class);
+        Intent intent = new Intent(this, TextRecoganization.class);
         startActivity(intent);
     }
 

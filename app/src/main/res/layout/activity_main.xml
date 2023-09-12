@@ -33,21 +33,39 @@
         style="@style/Widget.Neumorph.Button"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/image_classification"
+        android:src="@drawable/newimagedetection"
         android:onClick="onGotoImageActivity"
 
-
     />
+
 
     <soup.neumorphism.NeumorphImageButton
         android:id="@+id/button2"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/flower_identifiation"
+        android:src="@drawable/newflower"
         style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoFlowerActivity"
         />
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image detection"
+            android:layout_marginRight="6dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flower detection"
+            android:layout_marginLeft="62.55dp"/>
+    </LinearLayout>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -61,7 +79,7 @@
         android:id="@+id/button3"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/object_detection"
+        android:src="@drawable/newobjectdetection"
         style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoObjectDetection"
 
@@ -71,11 +89,29 @@
         android:id="@+id/button4"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/face_detection"
+        android:src="@drawable/newfacedete"
         style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoFaceDetection"
         />
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Object detection"
+            android:layout_marginRight="6dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Face detection"
+            android:layout_marginLeft="62.55dp"/>
+    </LinearLayout>
 
 <LinearLayout
         android:layout_width="match_parent"
@@ -88,9 +124,20 @@
         android:id="@+id/button5"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/voice_detection"
+        android:src="@drawable/newimageconverter"
         style="@style/Widget.Neumorph.Button"
         android:onClick="onGotoAudioClassification"
         />
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image converter"/>
+
+    </LinearLayout>
 </LinearLayout>
