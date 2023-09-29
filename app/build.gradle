@@ -66,4 +66,7 @@ dependencies {
 
     //for image to text
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.0'
+
+    //for fadein text view
+    implementation 'com.tomer:fadingtextview:2.5'
 }
