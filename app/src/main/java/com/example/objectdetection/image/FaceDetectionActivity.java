@@ -1,7 +1,6 @@
 package com.example.objectdetection.image;
 
 import android.graphics.Bitmap;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ import com.google.mlkit.vision.face.FaceDetectorOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaceDetectionActivity  extends ImageHelperActivity {
+public class FaceDetectionActivity extends ImageHelperActivity {
 
     private FaceDetector faceDetector;
 
@@ -38,33 +37,29 @@ public class FaceDetectionActivity  extends ImageHelperActivity {
 
     @Override
     protected void runclassification(Bitmap bitmap) {
+        if (bitmap == null) return;
 
-        InputImage inputImage = InputImage.fromBitmap(bitmap,0);
+        InputImage inputImage = InputImage.fromBitmap(bitmap, 0);
 
         faceDetector.process(inputImage)
                 .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
                     @Override
                     public void onSuccess(List<Face> faces) {
-                        if (faces.isEmpty()){
-                            getTextViewOutput().setText("No face detected");
-                        }else {
+                        if (faces == null || faces.isEmpty()) {
+                            if (getTextViewOutput() != null)
+                                getTextViewOutput().setText("No face detected");
+                        } else {
                             List<BoxWithLabel> boxes = new ArrayList<>();
-                            for (Face face  : faces) {
-                                BoxWithLabel boxWithLabel = new BoxWithLabel(
-                                        face.getBoundingBox(),
-                                        face.getTrackingId() + ""
-                                );
-                                boxes.add(boxWithLabel);
+                            for (Face face : faces) {
+                                int trackingId = face.getTrackingId() != null ? face.getTrackingId() : -1;
+                                boxes.add(new BoxWithLabel(face.getBoundingBox(), String.valueOf(trackingId)));
                             }
-                            drawDetectionResult(boxes,bitmap);
+                            drawDetectionResult(boxes, bitmap);
                         }
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
+                .addOnFailureListener(e -> {
+                    // Optional: log or show failure
                 });
     }
 }

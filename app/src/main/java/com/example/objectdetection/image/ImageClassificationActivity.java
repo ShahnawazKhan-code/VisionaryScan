@@ -29,31 +29,42 @@ public class ImageClassificationActivity extends ImageHelperActivity {
 
     @Override
     protected void runclassification(Bitmap bitmap) {
+        if (bitmap == null) return;
 
+        InputImage inputImage = InputImage.fromBitmap(bitmap, 0);
 
-        InputImage inputImage= InputImage.fromBitmap(bitmap,0);
-        imageLabeler.process(inputImage).addOnSuccessListener(new OnSuccessListener<List<ImageLabel>>() {
-            @Override
-            public void onSuccess(@NonNull List<ImageLabel> imageLabels) {
-                if (imageLabels.size()>0){
-                    StringBuilder builder = new StringBuilder();
-                    for (ImageLabel label : imageLabels){
-                        builder.append(label.getText())
-                                .append(" : ")
-                                .append(label.getConfidence())
-                                .append("\n");
+        imageLabeler.process(inputImage)
+                .addOnSuccessListener(new OnSuccessListener<List<ImageLabel>>() {
+                    @Override
+                    public void onSuccess(@NonNull List<ImageLabel> imageLabels) {
+                        if (imageLabels != null && !imageLabels.isEmpty()) {
+                            StringBuilder builder = new StringBuilder();
+                            for (ImageLabel label : imageLabels) {
+                                if (label != null && label.getText() != null) {
+                                    builder.append(label.getText())
+                                            .append(" : ")
+                                            .append(label.getConfidence())
+                                            .append("\n");
+                                }
+                            }
+
+                            if (getTextViewOutput() != null) {
+                                String resultText = builder.length() > 0 ? builder.toString() : "No labels detected";
+                                getTextViewOutput().setText(resultText);
+                            }
+                        } else {
+                            if (getTextViewOutput() != null)
+                                getTextViewOutput().setText("Could not classify");
+                        }
                     }
-                    getTextViewOutput().setText(builder.toString());
-
-                } else {
-                    getTextViewOutput().setText("could not classify");
-                }
-            }
-        }) .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                        if (getTextViewOutput() != null)
+                            getTextViewOutput().setText("Classification failed: " + (e.getMessage() != null ? e.getMessage() : ""));
+                    }
+                });
     }
 }

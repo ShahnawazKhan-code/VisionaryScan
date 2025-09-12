@@ -15,12 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.objectdetection.MainActivity;
 import com.example.objectdetection.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -30,7 +28,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 import java.io.IOException;
 
 public class TextRecoganization extends AppCompatActivity {
-    Button camerabtn,copybtn,clearbtn;
+    Button camerabtn, copybtn, clearbtn;
     Uri imageUri;
     EditText recgText;
     TextRecognizer textRecognizer;
@@ -40,101 +38,93 @@ public class TextRecoganization extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_recoganization);
 
-        camerabtn=findViewById(R.id.camerabtn);
-        copybtn=findViewById(R.id.copybtn);
-        clearbtn=findViewById(R.id.clearbtn);
+        camerabtn = findViewById(R.id.camerabtn);
+        copybtn = findViewById(R.id.copybtn);
+        clearbtn = findViewById(R.id.clearbtn);
         recgText = findViewById(R.id.recgText);
 
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
-        camerabtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImagePicker.with(TextRecoganization.this)
-                        .crop()	    			//Crop image(Optional), Check Customization for more option
-                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                        .start();
-            }
-        });
+        camerabtn.setOnClickListener(v -> ImagePicker.with(TextRecoganization.this)
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .start());
 
-        copybtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = recgText.getText().toString();
-
-                if (text.isEmpty()){
-                    Toast.makeText(TextRecoganization.this, "Text is empty", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(TextRecoganization.this.CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("Data",recgText.getText().toString());
+        copybtn.setOnClickListener(v -> {
+            String text = recgText.getText() != null ? recgText.getText().toString() : "";
+            if (text.isEmpty()) {
+                Toast.makeText(TextRecoganization.this, "Text is empty", Toast.LENGTH_SHORT).show();
+            } else {
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("Data", text);
+                if (clipboardManager != null) {
                     clipboardManager.setPrimaryClip(clipData);
-
-                    Toast.makeText(TextRecoganization.this, "Text copy in Clipboard", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TextRecoganization.this, "Text copied to Clipboard", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        clearbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = recgText.getText().toString();
-                if (text.isEmpty()){
-                    Toast.makeText(TextRecoganization.this, "Text is empty", Toast.LENGTH_SHORT).show();
-                }else {
-                    recgText.setText("");
-                }
+        clearbtn.setOnClickListener(v -> {
+            String text = recgText.getText() != null ? recgText.getText().toString() : "";
+            if (text.isEmpty()) {
+                Toast.makeText(TextRecoganization.this, "Text is empty", Toast.LENGTH_SHORT).show();
+            } else {
+                recgText.setText("");
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-        if (resultCode== Activity.RESULT_OK){
-            if (data!=null){
-                imageUri = data.getData();
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            imageUri = data.getData();
+            if (imageUri != null) {
                 Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
-
                 recoganizetionText();
+            } else {
+                Toast.makeText(this, "Image URI is null", Toast.LENGTH_SHORT).show();
             }
-
-        }
-        else{
+        } else {
             Toast.makeText(this, "Image not selected", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void recoganizetionText() {
-        if (imageUri!=null){
+        if (imageUri != null) {
             try {
-                InputImage inputImage=InputImage.fromFilePath(TextRecoganization.this,imageUri);
+                InputImage inputImage = InputImage.fromFilePath(this, imageUri);
 
-
-                Task<Text> result = textRecognizer.process(inputImage)
+                textRecognizer.process(inputImage)
                         .addOnSuccessListener(new OnSuccessListener<Text>() {
                             @Override
                             public void onSuccess(Text text) {
-                               String recognizeText = text.getText();
-                               recgText.setText(recognizeText);
-
+                                if (text != null) {
+                                    String recognizeText = text.getText();
+                                    if (recognizeText != null && !recognizeText.isEmpty()) {
+                                        recgText.setText(recognizeText);
+                                    } else {
+                                        recgText.setText("");
+                                        Toast.makeText(TextRecoganization.this, "No text detected", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    recgText.setText("");
+                                    Toast.makeText(TextRecoganization.this, "No result from recognizer", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(TextRecoganization.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(TextRecoganization.this,
+                                e.getMessage() != null ? e.getMessage() : "Text recognition failed",
+                                Toast.LENGTH_SHORT).show());
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(this, "Image URI is null", Toast.LENGTH_SHORT).show();
         }
     }
 }
